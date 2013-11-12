@@ -18,8 +18,8 @@
 }
 
 
-// tests
-TEST(version);
-TEST(schemes);
+/* tests */
+TEST(version)
+TEST(schemes)
 
 #endif

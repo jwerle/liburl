@@ -6,7 +6,7 @@
 #include <assert.h>
 #include "test.h"
 
-// implements http://url.spec.whatwg.org/#relative-scheme
+/* implements http://url.spec.whatwg.org/#relative-scheme */
 TEST_IMPL(schemes) {
   char **scheme = NULL;
 

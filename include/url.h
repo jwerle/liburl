@@ -5,7 +5,7 @@
 #if __GNUC__ >= 4
 # define URL_EXTERN __attribute__((visibility("default")))
 #else
-# define URL_EXTERN // do nothing
+# define URL_EXTERN
 #endif
 
 #define URL_STRINGIFY_HELPER(x) #x
