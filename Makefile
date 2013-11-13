@@ -14,7 +14,7 @@ TARGET_STATIC = $(TARGET_NAME).a
 TARGET_DSOLIB = $(TARGET_NAME).so.$(VERSION_MAJOR).$(VERSION_MINOR)
 TARGET_DYLIB = $(TARGET_NAME).$(VERSION_MAJOR).$(VERSION_MINOR).dylib
 TARGET_DSO = $(TARGET_NAME).so
-CFLAGS ?= -Iinclude -std=c99 -Wextra -Wall -fvisibility=hidden -O2 -fPIC -pedantic
+CFLAGS ?= -Iinclude -std=c99 -Wall -fvisibility=hidden -O2 -fPIC -pedantic
 LDFLAGS ?= -shared -soname $(TARGET_DSO).$(VERSION_MAJOR)
 OSX_LDFLAGS ?= -lc -Wl,-install_name,$(TARGET_DSO), -o $(TARGET_DSOLIB)
 SRC = $(wildcard src/*.c)
@@ -22,6 +22,10 @@ OBJS = $(SRC:.c=.o)
 TEST_SRC = $(filter-out test/test.c, $(wildcard test/*.c))
 TEST_OBJS = $(TEST_SRC:.c=.o)
 TEST_MAIN = url-test
+
+ifdef DEBUG
+	CFLAGS += -DURL_DEBUG
+endif
 
 all: $(TARGET_STATIC) $(TARGET_DSO)
 
@@ -47,7 +51,7 @@ test/.c.o:
 	$(CC) $(CFLAGS) -c $<
 
 test: all $(TEST_OBJS)
-	$(CC) $(TEST_OBJS) test/test.c ./$(TARGET_STATIC) -Iinclude -Wall -o $(TEST_MAIN)
+	$(CC) $(TEST_OBJS) test/test.c ./$(TARGET_STATIC) $(CFLAGS) -o $(TEST_MAIN)
 	$(VALGRIND) ./$(TEST_MAIN)
 
 

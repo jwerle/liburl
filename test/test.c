@@ -11,7 +11,9 @@ main (void) {
   printf("\n");
 
   TEST_RUN(version);
-  TEST_RUN(schemes);
+  TEST_RUN(common);
+  TEST_RUN(relative_schemes);
+  TEST_RUN(parser);
 
   return 0;
 }

@@ -7,7 +7,7 @@
 #include <string.h>
 #include "common.h"
 
-static char *_url_schemes[][2] = {
+static char *_url_relative_schemes[][2] = {
     {"ftp", "21"}
   , {"file", NULL}
   , {"gopher", "70"}
@@ -16,7 +16,5 @@ static char *_url_schemes[][2] = {
   , {"ws", "80"}
   , {"wss", "443"}
 };
-
-
 
 #endif
