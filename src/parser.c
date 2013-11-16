@@ -354,8 +354,8 @@ url_parse (const char *url, const char *base) {
           p--;
 
           // length of 2
-          if (1 == i && 1 == IS_BIT_SET(ASCII_ALPHA, buffer[0]) &&
-              ':' == buffer[1] || '|' == buffer[1]) {
+          if ((1 == i && 1 == IS_BIT_SET(ASCII_ALPHA, buffer[0])) &&
+              (':' == buffer[1] || '|' == buffer[1])) {
             state = RELATIVE_PATH_STATE;
           } else if (i == 0) {
             state = RELATIVE_PATH_START_STATE;
