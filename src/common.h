@@ -7,7 +7,7 @@
  * a bit `b' is set in `n'
  */
 
-#define IS_BIT_SET(n, b) (b == (n & b))
+#define IS_BIT_SET(n, b) (b == (n & b)) ? 1 : 0
 
 /**
  * Converts a char to lower case
@@ -28,7 +28,7 @@
 #ifdef URL_DEBUG
 #define debug printf
 #else
-#define debug(s) /* noop */
+#define debug(...) /* noop */
 #endif
 
 #endif

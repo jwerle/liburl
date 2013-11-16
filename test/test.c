@@ -13,6 +13,7 @@ main (void) {
   TEST_RUN(version);
   TEST_RUN(common);
   TEST_RUN(relative_schemes);
+  TEST_RUN(encode);
   TEST_RUN(parser);
 
   return 0;

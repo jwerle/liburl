@@ -70,10 +70,17 @@
 )
 
 /**
- * Defines a scheme separator code point
+ * Defines code points for a url
+ * http://url.spec.whatwg.org/#url-code-points
  */
 
-#define SCHEME_SEPARATOR 0x03a
+#define URL_ASCII (                                                            \
+  (ASCII_ALPHANUMERIC) |                                                       \
+  '!' | '$' | '&' | '\''| '(' | ')' | '*' |                                    \
+  '+' | ',' | '-' | '.' | '/' | ':' | ';' |                                    \
+  '=' | '?' | '@' | '_' | '~'                                                  \
+)
+
 
 /**
  * Defines the scheme start state
@@ -206,5 +213,14 @@
  */
 
 #define FRAGMENT_STATE 0x13
+
+/**
+ * Checks if a bit is in range of
+ * two hex valuese
+ */
+
+#define IN_RANGE(c, a, b) (                                                    \
+  (c >= a) && (c <= b)                                                         \
+) ? 1 : 0
 
 #endif

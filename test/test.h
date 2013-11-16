@@ -23,6 +23,7 @@
 TEST(common);
 TEST(version);
 TEST(relative_schemes);
+TEST(encode);
 TEST(parser);
 
 #endif

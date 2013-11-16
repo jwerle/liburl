@@ -11,6 +11,50 @@
 #define URL_STRINGIFY_HELPER(x) #x
 #define URL_STRINGIFY(x) URL_STRINGIFY_HELPER(x)
 
+#define URL_BUFFER_MAX 2000
+#define URL_PATH_MAX 512
+#define URL_SCHEME_MAX 512
+
+/**
+ * Defines the url relative flag
+ */
+
+#define URL_RELATIVE 0x01
+
+/**
+ * Defines the url '@' symbol flag
+ */
+
+#define URL_AMPERTSAT 0x02
+
+
+/**
+ * Defines the simple encode set
+ * flag
+ */
+
+#define URL_SIMPLE_ENCODE_SET 0x01
+
+/**
+ * Defines the default encode set
+ * flag
+ */
+
+#define URL_DEFAULT_ENCODE_SET 0x02
+
+/**
+ * Defines the password encode set
+ * flag
+ */
+
+#define URL_PASSWORD_ENCODE_SET 0x03
+
+/**
+ * Defines the username encode set
+ * flag
+ */
+
+#define URL_USERNAME_ENCODE_SET 0x04
 
 /**
  * Defines the `URLUtils' interface
@@ -18,17 +62,17 @@
  */
 
 #define IURL_FIELDS                                                            \
-  const char *href;                                                            \
-  const char *origin;                                                          \
-  const char *protocol;                                                        \
-  const char *username;                                                        \
-  const char *password;                                                        \
-  const char *host;                                                            \
-  const char *hostname;                                                        \
-  const char *port;                                                            \
-  const char *pathname;                                                        \
-  const char *search;                                                          \
-  const char *hash;                                                            \
+  char *href;                                                                  \
+  char *origin;                                                                \
+  char *protocol;                                                              \
+  char *username;                                                              \
+  char *password;                                                              \
+  char *host;                                                                  \
+  char *hostname;                                                              \
+  char *port;                                                                  \
+  char *pathname;                                                              \
+  char *search;                                                                \
+  char *hash;                                                                  \
 
 /**
  * Defines a `url_t' type that implements the `URL' interface
@@ -38,7 +82,8 @@ typedef struct url_s {
   IURL_FIELDS
   const char *url;
   const char *base;
-  char **scheme;
+  char *scheme;
+  char *path[URL_PATH_MAX];
   int flags;
 } url_t;
 
@@ -82,6 +127,14 @@ URL_EXTERN url_t *
 url_parse (const char *url, const char *base);
 
 /**
+ * Parses a host from a given url string
+ * http://url.spec.whatwg.org/#concept-host-parser
+ */
+
+URL_EXTERN char *
+url_parse_host (const char *url);
+
+/**
  * Serializes a given `url_t' structure into a valid
  * url
  */
@@ -103,5 +156,22 @@ url_free (url_t *url);
 
 URL_EXTERN void
 url_inspect (url_t *url);
+
+/**
+ * Encodes a string into a sequence of
+ * percent encode bytes
+ * http://url.spec.whatwg.org/#percent-encoded-byte
+ */
+
+URL_EXTERN char *
+url_percent_encode (char *str, int set);
+
+/**
+ * Returns a percent encoded byte
+ * http://url.spec.whatwg.org/#percent-encode
+ */
+
+URL_EXTERN char *
+url_percent_encode_byte (char byte, int set);
 
 #endif
